@@ -2,19 +2,16 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 23
-
-    defaultConfig {
-        applicationId "info.androidhive.loginandregistration"
-        minSdkVersion 15
-        targetSdkVersion 23
-    }
-
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
         }
     }
+    productFlavors {
+
+    }
+    defaultConfig {}
 }
 
 dependencies {
