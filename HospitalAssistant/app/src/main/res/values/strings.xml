@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Hospital Assistant</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="patient">patient</string>
+    <string name="medicine">medicine</string>
+    <string name="temperature">temperature</string>
+    <string name="qrscan">qrscan</string>
+    <string name="settings">settings</string>
+    <string name="pressure">pressure</string>
+</resources>

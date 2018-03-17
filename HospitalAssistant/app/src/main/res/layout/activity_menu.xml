@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorSecondaryDark"
+    tools:context="com.example.eziteam.hospitalassistant.MenuActivity"
+    tools:layout_editor_absoluteY="81dp">
+
+    <android.support.design.widget.BottomNavigationView
+        android:id="@+id/navigation"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="2dp"
+        app:itemBackground="@color/navigationBar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:menu="@menu/navigation">
+
+    </android.support.design.widget.BottomNavigationView>
+
+    <ImageButton
+        android:id="@+id/patientButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignStart="@+id/temperatureButton"
+        android:layout_marginEnd="5dp"
+        android:contentDescription="@string/patient"
+        android:elevation="0dp"
+        app:layout_constraintBottom_toBottomOf="@+id/medicineButton"
+        app:layout_constraintEnd_toStartOf="@+id/medicineButton"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/medicineButton"
+        app:srcCompat="@drawable/patient" />
+
+    <ImageButton
+        android:id="@+id/medicineButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignStart="@+id/pressureButton"
+        android:layout_marginEnd="1dp"
+        android:layout_marginTop="30dp"
+        android:contentDescription="@string/medicine"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/patientButton"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/medicine" />
+
+    <ImageButton
+        android:id="@+id/temperatureButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/settingsButton"
+        android:layout_alignStart="@+id/settingsButton"
+        android:layout_marginEnd="5dp"
+        android:layout_marginTop="40dp"
+        android:contentDescription="@string/temperature"
+        app:layout_constraintEnd_toStartOf="@+id/pressureButton"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/patientButton"
+        app:srcCompat="@drawable/temperature" />
+
+    <ImageButton
+        android:id="@+id/pressureButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/qrButton"
+        android:layout_below="@+id/patientButton"
+        android:layout_marginEnd="1dp"
+        android:layout_marginTop="40dp"
+        android:contentDescription="@string/pressure"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/temperatureButton"
+        app:layout_constraintTop_toBottomOf="@+id/medicineButton"
+        app:srcCompat="@drawable/pressure" />
+
+    <ImageButton
+        android:id="@+id/settingsButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignTop="@+id/qrButton"
+        android:layout_marginEnd="5dp"
+        android:layout_marginTop="40dp"
+        android:contentDescription="@string/settings"
+        app:layout_constraintEnd_toStartOf="@+id/qrButton"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/temperatureButton"
+        app:srcCompat="@drawable/settings" />
+
+    <ImageButton
+        android:id="@+id/qrButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/navigation"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="1dp"
+        android:layout_marginTop="40dp"
+        android:contentDescription="@string/qrscan"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/settingsButton"
+        app:layout_constraintTop_toBottomOf="@+id/pressureButton"
+        app:srcCompat="@drawable/qr" />
+</android.support.constraint.ConstraintLayout>

@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorSecondaryDark"
+    tools:context="com.example.eziteam.hospitalassistant.PatientActivity"
+    tools:layout_editor_absoluteY="81dp">
+
+    <EditText
+        android:id="@+id/firstnameText"
+        android:layout_width="wrap_content"
+        android:layout_height="47dp"
+        android:layout_marginBottom="24dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Andrzej"
+        android:textColor="@android:color/white"
+        app:layout_constraintBottom_toTopOf="@+id/lastnameText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/firstnameLabel" />
+
+    <TextView
+        android:id="@+id/firstnameLabel"
+        android:layout_width="145dp"
+        android:layout_height="45dp"
+        android:layout_marginBottom="24dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="48dp"
+        android:padding="10dp"
+        android:text="firstname"
+        android:textAppearance="@style/TextAppearance.AppCompat"
+        android:textColor="@android:color/white"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/lastnameLabel"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/lastnameText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Nieandrzej"
+        android:textColor="@android:color/white"
+        app:layout_constraintBottom_toTopOf="@+id/peselText"
+        app:layout_constraintEnd_toEndOf="@+id/firstnameText" />
+
+    <TextView
+        android:id="@+id/lastnameLabel"
+        android:layout_width="145dp"
+        android:layout_height="45dp"
+        android:layout_marginBottom="24dp"
+        android:padding="10dp"
+        android:text="lastname"
+        android:textAppearance="@style/TextAppearance.AppCompat"
+        android:textColor="@android:color/white"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/peselLabel"
+        app:layout_constraintStart_toStartOf="@+id/firstnameLabel" />
+
+    <TextView
+        android:id="@+id/peselLabel"
+        android:layout_width="145dp"
+        android:layout_height="45dp"
+        android:layout_marginBottom="24dp"
+        android:padding="10dp"
+        android:text="pesel"
+        android:textAppearance="@style/TextAppearance.AppCompat"
+        android:textColor="@android:color/white"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/phoneLabel"
+        app:layout_constraintStart_toStartOf="@+id/lastnameLabel" />
+
+    <EditText
+        android:id="@+id/peselText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        android:ems="10"
+        android:inputType="number"
+        android:text="99112211111"
+        android:textColor="@android:color/white"
+        app:layout_constraintBottom_toTopOf="@+id/phoneText"
+        app:layout_constraintEnd_toEndOf="@+id/lastnameText" />
+
+    <TextView
+        android:id="@+id/phoneLabel"
+        android:layout_width="145dp"
+        android:layout_height="45dp"
+        android:layout_marginBottom="24dp"
+        android:padding="10dp"
+        android:text="phone"
+        android:textAppearance="@style/TextAppearance.AppCompat"
+        android:textColor="@android:color/white"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/bloodTypeLabel"
+        app:layout_constraintStart_toStartOf="@+id/peselLabel" />
+
+    <EditText
+        android:id="@+id/phoneText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        android:ems="10"
+        android:inputType="number"
+        android:text="666777888"
+        android:textColor="@android:color/white"
+        app:layout_constraintBottom_toTopOf="@+id/bloodTypeText"
+        app:layout_constraintEnd_toEndOf="@+id/peselText" />
+
+    <TextView
+        android:id="@+id/bloodTypeLabel"
+        android:layout_width="145dp"
+        android:layout_height="45dp"
+        android:layout_marginBottom="24dp"
+        android:padding="10dp"
+        android:text="blood type"
+        android:textAppearance="@style/TextAppearance.AppCompat"
+        android:textColor="@android:color/white"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/postalAddressLabel"
+        app:layout_constraintStart_toStartOf="@+id/phoneLabel" />
+
+    <EditText
+        android:id="@+id/bloodTypeText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        android:ems="10"
+        android:inputType="text|textCapCharacters|textPersonName"
+        android:text="0 Rh-"
+        android:textColor="@android:color/white"
+        app:layout_constraintBottom_toTopOf="@+id/postalAddressText"
+        app:layout_constraintEnd_toEndOf="@+id/phoneText" />
+
+    <TextView
+        android:id="@+id/postalAddressLabel"
+        android:layout_width="145dp"
+        android:layout_height="45dp"
+        android:layout_marginBottom="24dp"
+        android:padding="10dp"
+        android:text="postal address"
+        android:textAppearance="@style/TextAppearance.AppCompat"
+        android:textColor="@android:color/white"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/cityLabel"
+        app:layout_constraintStart_toStartOf="@+id/bloodTypeLabel" />
+
+    <EditText
+        android:id="@+id/postalAddressText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        android:ems="10"
+        android:inputType="textPostalAddress"
+        android:text="11-222"
+        android:textColor="@android:color/white"
+        app:layout_constraintBottom_toTopOf="@+id/cityText"
+        app:layout_constraintEnd_toEndOf="@+id/bloodTypeText" />
+
+    <TextView
+        android:id="@+id/cityLabel"
+        android:layout_width="145dp"
+        android:layout_height="45dp"
+        android:layout_marginBottom="24dp"
+        android:padding="10dp"
+        android:text="city"
+        android:textAppearance="@style/TextAppearance.AppCompat"
+        android:textColor="@android:color/white"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/homeNumberLabel"
+        app:layout_constraintStart_toStartOf="@+id/postalAddressLabel" />
+
+    <EditText
+        android:id="@+id/cityText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        android:ems="10"
+        android:inputType="text"
+        android:text="Las Vegas"
+        android:textColor="@android:color/white"
+        app:layout_constraintBottom_toTopOf="@+id/homeNumberText"
+        app:layout_constraintEnd_toEndOf="@+id/postalAddressText" />
+
+    <TextView
+        android:id="@+id/homeNumberLabel"
+        android:layout_width="145dp"
+        android:layout_height="45dp"
+        android:layout_marginBottom="16dp"
+        android:padding="10dp"
+        android:text="home number"
+        android:textAppearance="@style/TextAppearance.AppCompat"
+        android:textColor="@android:color/white"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/cityLabel" />
+
+    <EditText
+        android:id="@+id/homeNumberText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="18dp"
+        android:ems="10"
+        android:inputType="text"
+        android:text="1/17"
+        android:textColor="@android:color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/cityText" />
+</android.support.constraint.ConstraintLayout>
