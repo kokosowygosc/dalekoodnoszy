@@ -4,16 +4,33 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorSecondaryDark"
     tools:context="com.example.eziteam.hospitalassistant.QrActivity"
     tools:layout_editor_absoluteY="81dp">
 
-    <TextView
-        android:id="@+id/textView4"
+
+    <ImageButton
+        android:id="@+id/qrScanButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="109dp"
-        android:layout_marginTop="173dp"
-        android:text="Qr"
+        android:layout_marginBottom="63dp"
+        android:layout_marginTop="241dp"
+        app:layout_constraintBottom_toTopOf="@+id/scanQrLabel"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/scan" />
+
+    <TextView
+        android:id="@+id/scanQrLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="125dp"
+        android:text="Scan QR code"
+        android:textColor="@android:color/background_light"
+        android:textSize="40dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/qrScanButton" />
 </android.support.constraint.ConstraintLayout>

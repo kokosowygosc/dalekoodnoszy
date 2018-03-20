@@ -7,13 +7,10 @@
     tools:context="com.example.eziteam.hospitalassistant.PressureActivity"
     tools:layout_editor_absoluteY="81dp">
 
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="69dp"
-        android:layout_marginTop="225dp"
-        android:text="Pressure"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <ExpandableListView
+        android:id="@+id/pressureExpandable"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+
+        />
 </android.support.constraint.ConstraintLayout>

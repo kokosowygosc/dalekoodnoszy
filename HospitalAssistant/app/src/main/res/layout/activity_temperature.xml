@@ -7,13 +7,12 @@
     tools:context="com.example.eziteam.hospitalassistant.TemperatureActivity"
     tools:layout_editor_absoluteY="81dp">
 
-    <TextView
-        android:id="@+id/textView6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="65dp"
-        android:layout_marginTop="97dp"
-        android:text="Temperature"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <ExpandableListView
+        android:id="@+id/temperatureExpandable"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+
+    />
+
+
 </android.support.constraint.ConstraintLayout>
