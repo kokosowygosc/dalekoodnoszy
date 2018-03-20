@@ -1,0 +1,29 @@
+<resources>
+    <string name="app_name">MedBei</string>
+    <string name="title_activity_login">Zaloguj się</string>
+
+    <string name="form_name">Dodaj pacjenta</string>
+    <string name="qr_name">Skan QR</string>
+    <string name="settings_name">Ustawienia</string>
+    <string name="patientlist_name">Lista pacjentów</string>
+    <string name="editpatient_name">Edycja pacjentów</string>
+
+    <!-- Strings related to login -->
+    <string name="prompt_user">Uzytkownik</string>
+    <string name="prompt_password">Hasło</string>
+    <string name="action_sign_in">Zaloguj się/Rejestracja</string>
+    <string name="action_sign_in_short">Zaloguj się</string>
+    <string name="error_invalid_email">Ta nazwa uzytkownika jest niepoprawna</string>
+    <string name="error_invalid_password">Hasło jest za krótkie</string>
+    <string name="error_incorrect_password">Złe hasło</string>
+    <string name="error_field_required">To pole jest wymagane</string>
+    <string name="permission_rationale">"Contacts permissions are needed for providing email
+        completions."
+    </string>
+    <string name="title_activity_menu">Profil</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+
+</resources>
