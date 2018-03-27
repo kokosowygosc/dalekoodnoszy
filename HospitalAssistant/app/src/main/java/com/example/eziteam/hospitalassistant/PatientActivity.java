@@ -63,6 +63,14 @@ public class PatientActivity extends AppCompatActivity {
             public void onClick(View view) {
                 db.deletepatient();
                 String pesel = "85052659868"; //95081065242, 94060156866
+
+                /*
+                Passed data from QRScanner
+
+                Bundle revTarget = getIntent().getExtras();
+                String pesel = revTarget.getString("pesel");
+                 */
+
                 Get_patient(pesel);
             }
         });
@@ -101,6 +109,7 @@ public class PatientActivity extends AppCompatActivity {
 
         pDialog.setMessage("Pobieranie danych..." );
         showDialog();
+
 
         StringRequest strReq = new StringRequest( Request.Method.POST,
                 ConnectConfig.URL_LOGIN, new Response.Listener<String>() {

@@ -46,7 +46,19 @@ public class QrActivity extends AppCompatActivity {
             if(result.getContents() == null) {
                 Toast.makeText(this, "You cancelled scanning.", Toast.LENGTH_SHORT).show();
             } else {
-                Toast.makeText(this, result.getContents(), Toast.LENGTH_LONG).show();
+                //Toast.makeText(this, result.getContents(), Toast.LENGTH_LONG).show();
+
+                //Assigned activity to target
+                Intent target = new Intent(this, PatientActivity.class);
+
+                //Assigned QRScanner result to target
+                Bundle passingData = new Bundle();
+                passingData.putString("pesel", result.getContents());
+                target.putExtras(passingData);
+
+                //Opens target
+                startActivity(target);
+
             }
         } else {
             super.onActivityResult(requestCode, resultCode, data);
