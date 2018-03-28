@@ -127,6 +127,12 @@ public class MenuActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+                SharedPreferences prefs = getSharedPreferences("sharedData", MODE_PRIVATE);
+                testMode=false;
+                Boolean restoredTest = prefs.getBoolean("testMode", false);
+                if (restoredTest) {
+                    testMode = prefs.getBoolean("testMode", false);
+                }
                 if(testMode){
                     // fake pesels numbers
                     // 85052659868

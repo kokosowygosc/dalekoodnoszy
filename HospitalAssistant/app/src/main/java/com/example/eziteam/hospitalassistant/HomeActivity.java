@@ -19,7 +19,7 @@ import com.google.zxing.integration.android.IntentResult;
 
     public class HomeActivity extends AppCompatActivity {
     SharedPreferences.Editor editor;
-    Boolean testMode;
+    Boolean testMode=false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,6 +38,11 @@ import com.google.zxing.integration.android.IntentResult;
         }
 
         Switch testModeSwitch = findViewById(R.id.switchTestEnv);
+        if(testMode){
+            testModeSwitch.setChecked(true);
+        } else{
+            testModeSwitch.setChecked(false);
+        }
         testModeSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 
             @Override
