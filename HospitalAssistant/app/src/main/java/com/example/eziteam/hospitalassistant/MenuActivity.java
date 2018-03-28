@@ -49,6 +49,7 @@ public class MenuActivity extends AppCompatActivity {
         ImageButton pressureButton = (ImageButton) findViewById(R.id.pressureButton);
         ImageButton settingsButton = (ImageButton) findViewById(R.id.settingsButton);
         ImageButton qrButton = (ImageButton) findViewById(R.id.qrButton);
+        ImageButton addNewButton = (ImageButton) findViewById(R.id.addNewButton);
         TextView patientDataInfo = findViewById(R.id.patientDataInfo);
         pesel="";
         doctorId="";
@@ -119,6 +120,14 @@ public class MenuActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent settingsIntent = new Intent(getApplicationContext(),SettingsActivity.class);
+                startActivity(settingsIntent);
+            }
+        });
+
+        addNewButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent settingsIntent = new Intent(getApplicationContext(),addNewActivity.class);
                 startActivity(settingsIntent);
             }
         });
