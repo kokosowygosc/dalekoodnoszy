@@ -17,6 +17,17 @@ public class TemperatureActivity extends AppCompatActivity {
     private List<String> listDataHeader;
     private HashMap<String,List<String>> listHash;
 
+    String data[][] =
+            {
+                    {"12.03.18", "8:00 36.9", "12:00 36.9", "16:00 36.9", "20:00 36.9"},
+                    {"13.03.18", "8:00 36.9", "12:00 36.9", "16:00 36.9", "20:00 36.9"},
+                    {"14.03.18", "8:00 36.9", "12:00 36.9", "16:00 36.9", "20:00 36.9"},
+                    {"15.03.18", "8:00 36.9", "12:00 36.9", "16:00 36.9", "20:00 36.9"},
+                    {"16.03.18", "8:00 36.9", "12:00 36.9", "16:00 36.9", "20:00 36.9"},
+                    {"17.03.18", "8:00 36.9", "12:00 36.9", "16:00 36.9", "20:00 36.9"},
+                    {"18.03.18", "8:00 36.9", "12:00 36.9", "16:00 36.9", "20:00 36.9"},
+            };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,55 +51,38 @@ public class TemperatureActivity extends AppCompatActivity {
     private void initData() {
         listDataHeader = new ArrayList<>();
         listHash = new HashMap<>();
-        listDataHeader.add("12.03.18");
-        listDataHeader.add("13.03.18");
-        listDataHeader.add("14.03.18");
-        listDataHeader.add("15.03.18");
-        listDataHeader.add("16.03.18");
-        listDataHeader.add("17.03.18");
-        listDataHeader.add("18.03.18");
-
         List<String> firstDay = new ArrayList<>();
-        firstDay.add("8:00 36.6");
-        firstDay.add("12:00 36.7");
-        firstDay.add("16:00 36.6");
-        firstDay.add("20:00 36.8");
-
         List<String> secondDay = new ArrayList<>();
-        secondDay.add("8:00 36.6");
-        secondDay.add("12:00 36.7");
-        secondDay.add("16:00 36.6");
-        secondDay.add("20:00 36.8");
-
         List<String> thirdDay = new ArrayList<>();
-        thirdDay.add("8:00 36.6");
-        thirdDay.add("12:00 36.7");
-        thirdDay.add("16:00 36.6");
-        thirdDay.add("20:00 36.8");
-
         List<String> fourthDay = new ArrayList<>();
-        fourthDay.add("8:00 36.6");
-        fourthDay.add("12:00 36.7");
-        fourthDay.add("16:00 36.6");
-        fourthDay.add("20:00 36.8");
-
         List<String> fifthDay = new ArrayList<>();
-        fifthDay.add("8:00 36.6");
-        fifthDay.add("12:00 36.7");
-        fifthDay.add("16:00 36.6");
-        fifthDay.add("20:00 36.8");
-
         List<String> sixthDay = new ArrayList<>();
-        sixthDay.add("8:00 36.6");
-        sixthDay.add("12:00 36.7");
-        sixthDay.add("16:00 36.6");
-        sixthDay.add("20:00 36.8");
-
         List<String> seventhDay = new ArrayList<>();
-        seventhDay.add("8:00 36.6");
-        seventhDay.add("12:00 36.7");
-        seventhDay.add("16:00 36.6");
-        seventhDay.add("20:00 36.8");
+
+        for(int i =0; i < data.length; i++)
+        {
+            listDataHeader.add(data[i][0]);
+        }
+
+        for(int i = 0; i <= data.length; i++)
+            for(int j = 0; j < data[0].length; j++)
+            {
+                if(i == 0 && j != 0)
+                    firstDay.add(data[i][j]);
+                if(i == 1 && j != 0)
+                    secondDay.add(data[i][j]);
+                if(i == 2 && j != 0)
+                    thirdDay.add(data[i][j]);
+                if(i == 3 && j != 0)
+                    fourthDay.add(data[i][j]);
+                if(i == 4 && j != 0)
+                    fifthDay.add(data[i][j]);
+                if(i == 5 && j != 0)
+                    sixthDay.add(data[i][j]);
+                if(i == 6 && j != 0)
+                    seventhDay.add(data[i][j]);
+            }
+
 
         listHash.put(listDataHeader.get(0),firstDay);
         listHash.put(listDataHeader.get(1),secondDay);

@@ -16,12 +16,21 @@ public class MedicineActivity extends AppCompatActivity {
     private List<String> listDataHeader;
     private HashMap<String,List<String>> listHash;
 
+    String data[][] =
+            {
+                    {"Morning", "Vitamin C: 2 caps","Prozac: 1 cap"},
+                    {"Midday", "Vitamin C: 2 caps", "Prozac: 1 cap"},
+                    {"Evening", "Vitamin C: 2 caps", "Prozac: 1 cap"}
+            };
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_medicine);
 
-        listView = (ExpandableListView)findViewById(R.id.medicineExpandable);
+        listView = findViewById(R.id.medicineExpandable);
         initData();
         listAdapter = new ExpandableListAdapter(this,listDataHeader,listHash);
         listView.setAdapter(listAdapter);
@@ -39,22 +48,24 @@ public class MedicineActivity extends AppCompatActivity {
     private void initData() {
         listDataHeader = new ArrayList<>();
         listHash = new HashMap<>();
-        listDataHeader.add("Morning");
-        listDataHeader.add("Midday");
-        listDataHeader.add("Evening");
-
         List<String> morning = new ArrayList<>();
-        morning.add("Vitamin C: 2 caps");
-        morning.add("Prozac: 1 cap");
-
         List<String> midday = new ArrayList<>();
-        midday.add("Vitamin C: 2 caps");
-        midday.add("Prozac: 1 cap");
-
         List<String> evening = new ArrayList<>();
-        evening.add("Vitamin C: 2 caps");
-        evening.add("Prozac: 1 cap");
 
+        for(int i = 0; i < data.length; i++)
+        {
+            listDataHeader.add(data[i][0]);
+        }
+
+        for(int i = 0; i <= data.length; i++)
+            for(int j = 0; j < data[0].length; j++) {
+                if (i == 0 && j != 0)
+                    morning.add(data[i][j]);
+                if (i == 1 && j != 0)
+                    midday.add(data[i][j]);
+                if (i == 2 && j != 0)
+                    evening.add(data[i][j]);
+            }
 
         listHash.put(listDataHeader.get(0),morning);
         listHash.put(listDataHeader.get(1),midday);
