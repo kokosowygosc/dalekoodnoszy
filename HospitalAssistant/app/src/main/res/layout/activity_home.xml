@@ -48,6 +48,18 @@
         app:layout_constraintRight_toRightOf="parent"
         tools:layout_editor_absoluteY="86dp" />
 
+    <Switch
+        android:id="@+id/switchTestEnv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp"
+        android:text="Test Mode"
+        app:layout_constraintBottom_toTopOf="@+id/navigation"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/qrScanButton" />
+
 
 </android.support.constraint.ConstraintLayout>
 

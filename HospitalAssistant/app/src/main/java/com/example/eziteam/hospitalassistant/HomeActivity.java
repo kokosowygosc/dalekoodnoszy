@@ -9,23 +9,55 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.CompoundButton;
 import android.widget.ImageButton;
+import android.widget.Switch;
 import android.widget.Toast;
 
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
     public class HomeActivity extends AppCompatActivity {
-
+    SharedPreferences.Editor editor;
+    Boolean testMode;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        SharedPreferences.Editor editor = getSharedPreferences("sharedData", MODE_PRIVATE).edit();
+        editor = getSharedPreferences("sharedData", MODE_PRIVATE).edit();
         editor.putString("pesel", "");
         editor.putString("id","");
+        editor.putBoolean("testMode",false);
         editor.apply();
+
+        SharedPreferences prefs = getSharedPreferences("sharedData", MODE_PRIVATE);
+        Boolean restoredText = prefs.getBoolean("testMode", false);
+        if (restoredText) {
+            testMode = prefs.getBoolean("testMode", false);
+        }
+
+        Switch testModeSwitch = findViewById(R.id.switchTestEnv);
+        testModeSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                editor.putBoolean("testMode", isChecked);
+                editor.apply();
+                if(isChecked){
+                    //Toast.makeText(getApplicationContext(), "1", Toast.LENGTH_SHORT).show();
+
+                    editor = getSharedPreferences("sharedData", MODE_PRIVATE).edit();
+                    editor.putString("id", "999999999");
+                    editor.apply();
+
+                    Intent target = new Intent(getApplicationContext(), MenuActivity.class);
+                    startActivity(target);
+                } else {
+                    //Toast.makeText(getApplicationContext(), "0", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
 
         final Activity activity = this;
         ImageButton qrScanButton = (ImageButton) findViewById(R.id.qrScanButton);

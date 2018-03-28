@@ -16,6 +16,7 @@ public class MenuActivity extends AppCompatActivity {
 
     String pesel;
     String doctorId;
+    Boolean testMode;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,6 +60,10 @@ public class MenuActivity extends AppCompatActivity {
         String restoredText2 = prefs.getString("pesel", null);
         if (restoredText2 != null) {
             doctorId = prefs.getString("id", "");
+        }
+        Boolean restoredText3 = prefs.getBoolean("testMode", false);
+        if (restoredText3) {
+            testMode = prefs.getBoolean("testMode", false);
         }
         if(pesel != ""){
             patientDataInfo.setVisibility(View.INVISIBLE);
@@ -121,8 +126,22 @@ public class MenuActivity extends AppCompatActivity {
         qrButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent qrIntent = new Intent(getApplicationContext(),QrActivity.class);
-                startActivity(qrIntent);
+
+                if(testMode){
+                    // fake pesels numbers
+                    // 85052659868
+                    // 95081065242
+                    // 94060156866
+                    SharedPreferences.Editor editor = getSharedPreferences("sharedData", MODE_PRIVATE).edit();
+                    editor.putString("pesel", "95081065242");
+                    editor.apply();
+                    Intent target = new Intent(getApplicationContext(), MenuActivity.class);
+                    startActivity(target);
+                }else{
+                    Intent qrIntent = new Intent(getApplicationContext(),QrActivity.class);
+                    startActivity(qrIntent);
+                }
+
             }
         });
 
