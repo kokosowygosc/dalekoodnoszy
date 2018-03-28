@@ -1,5 +1,6 @@
 package com.example.eziteam.hospitalassistant;
 
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ExpandableListView;
@@ -19,6 +20,14 @@ public class PressureActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pressure);
+
+        String pesel;
+        pesel="";
+        SharedPreferences prefs = getSharedPreferences("sharedData", MODE_PRIVATE);
+        String restoredText = prefs.getString("pesel", null);
+        if (restoredText != null) {
+            pesel = prefs.getString("pesel", "");
+        }
 
         listView = (ExpandableListView)findViewById(R.id.pressureExpandable);
         initData();

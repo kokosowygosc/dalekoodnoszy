@@ -1,8 +1,10 @@
 package com.example.eziteam.hospitalassistant;
 
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ExpandableListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -19,6 +21,15 @@ public class TemperatureActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_temperature);
+
+
+        String pesel;
+        pesel="";
+        SharedPreferences prefs = getSharedPreferences("sharedData", MODE_PRIVATE);
+        String restoredText = prefs.getString("pesel", null);
+        if (restoredText != null) {
+            pesel = prefs.getString("pesel", "");
+        }
 
         listView = (ExpandableListView)findViewById(R.id.temperatureExpandable);
         initData();

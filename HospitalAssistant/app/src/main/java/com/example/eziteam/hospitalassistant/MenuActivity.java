@@ -1,6 +1,7 @@
 package com.example.eziteam.hospitalassistant;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
@@ -8,11 +9,13 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class MenuActivity extends AppCompatActivity {
 
-
+    String pesel;
+    String doctorId;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,30 +28,55 @@ public class MenuActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.navigation_home:
-                        Toast.makeText(MenuActivity.this, "HOME", Toast.LENGTH_SHORT).show();
                         Intent intentHome = new Intent(getApplicationContext(), HomeActivity.class);
                         startActivity(intentHome);
                         break;
                     case R.id.navigation_menu:
-                        Toast.makeText(MenuActivity.this, "MENU", Toast.LENGTH_SHORT).show();
                         Intent intentMenu = new Intent(getApplicationContext(), MenuActivity.class);
                         startActivity(intentMenu);
                         break;
                     case R.id.navigation_exit:
-                        Toast.makeText(MenuActivity.this, "EXIT", Toast.LENGTH_SHORT).show();
                         break;
 
                 }
                 return true;
             }
         });
-
         ImageButton patientButton = (ImageButton) findViewById(R.id.patientButton);
         ImageButton medicineButton = (ImageButton) findViewById(R.id.medicineButton);
         ImageButton temperatureButton = (ImageButton) findViewById(R.id.temperatureButton);
         ImageButton pressureButton = (ImageButton) findViewById(R.id.pressureButton);
         ImageButton settingsButton = (ImageButton) findViewById(R.id.settingsButton);
         ImageButton qrButton = (ImageButton) findViewById(R.id.qrButton);
+        TextView patientDataInfo = findViewById(R.id.patientDataInfo);
+        pesel="";
+        doctorId="";
+        SharedPreferences prefs = getSharedPreferences("sharedData", MODE_PRIVATE);
+        String restoredText = prefs.getString("pesel", null);
+        if (restoredText != null) {
+            pesel = prefs.getString("pesel", "");
+        }
+        String restoredText2 = prefs.getString("pesel", null);
+        if (restoredText2 != null) {
+            doctorId = prefs.getString("id", "");
+        }
+        if(pesel != ""){
+            patientDataInfo.setVisibility(View.INVISIBLE);
+            patientButton.setVisibility(View.VISIBLE);
+            medicineButton.setVisibility(View.VISIBLE);
+            temperatureButton.setVisibility(View.VISIBLE);
+            pressureButton.setVisibility(View.VISIBLE);
+        }
+
+        if(new String("85052659868").equals(pesel.toString()) && new String("999999999").equals(doctorId.toString())){
+        //condition hardcoded for tests
+            patientButton.setVisibility(View.INVISIBLE);
+            medicineButton.setVisibility(View.INVISIBLE);
+            temperatureButton.setVisibility(View.INVISIBLE);
+            pressureButton.setVisibility(View.INVISIBLE);
+            patientDataInfo.setVisibility(View.VISIBLE);
+            Toast.makeText(getApplicationContext(), "You have no access for this patient!",Toast.LENGTH_LONG).show();
+        }
 
         patientButton.setOnClickListener(new View.OnClickListener() {
             @Override

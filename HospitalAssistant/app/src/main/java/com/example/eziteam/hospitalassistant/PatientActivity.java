@@ -2,6 +2,7 @@ package com.example.eziteam.hospitalassistant;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -44,6 +45,14 @@ public class PatientActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_patient);
 
+        String pesel;
+        pesel="";
+        SharedPreferences prefs = getSharedPreferences("sharedData", MODE_PRIVATE);
+        String restoredText = prefs.getString("pesel", null);
+        if (restoredText != null) {
+            pesel = prefs.getString("pesel", "");
+        }
+
         patient_name = (EditText)findViewById(R.id.firstnameText);
         patient_surname = (EditText)findViewById(R.id.lastnameText);
         patient_pesel = (EditText)findViewById(R.id.peselText);
@@ -58,20 +67,14 @@ public class PatientActivity extends AppCompatActivity {
         pDialog = new ProgressDialog(this);
         pDialog.setCancelable(false);
         db = new SQLiteHandler(getApplicationContext());
+        db.deletepatient();
+        Get_patient(pesel);
 
+        final String finalPesel = pesel;
         button_download.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 db.deletepatient();
-                String pesel = "85052659868"; //95081065242, 94060156866
-
-                /*
-                Passed data from QRScanner
-
-                Bundle revTarget = getIntent().getExtras();
-                String pesel = revTarget.getString("pesel");
-                 */
-
-                Get_patient(pesel);
+                Get_patient(finalPesel);
             }
         });
 
@@ -92,15 +95,6 @@ public class PatientActivity extends AppCompatActivity {
         String p_postal = patient.get("p_postal");
         String p_city = patient.get("p_city");
         String p_home_number = patient.get("p_home_number");
-
-        patient_name.setText(p_name);
-        patient_surname.setText(p_surname);
-        patient_pesel.setText(p_pesel);
-        patient_phone.setText(p_phone);
-        patient_blood.setText(p_blood);
-        patient_postal.setText(p_postal);
-        patient_city.setText(p_city);
-        patient_home_number.setText(p_home_number);
     }
 
     private void Get_patient(final String pesel) {
@@ -139,10 +133,14 @@ public class PatientActivity extends AppCompatActivity {
                         // Inserting row in users table
                         db.addPatient(p_name,p_surname,p_pesel,p_phone,p_blood,p_postal,p_city,p_home_number);
 
-                        // Launch main activity
-                        Intent intent = new Intent(PatientActivity.this,PatientActivity.class);
-                        startActivity(intent);
-                        finish();
+                        patient_name.setText(p_name);
+                        patient_surname.setText(p_surname);
+                        patient_pesel.setText(p_pesel);
+                        patient_phone.setText(p_phone);
+                        patient_blood.setText(p_blood);
+                        patient_postal.setText(p_postal);
+                        patient_city.setText(p_city);
+                        patient_home_number.setText(p_home_number);
                     } else {
                         // Error in login. Get the error message
                         String errorMsg = jObj.getString("error_msg");

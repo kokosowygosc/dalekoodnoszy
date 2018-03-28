@@ -2,6 +2,7 @@ package com.example.eziteam.hospitalassistant;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -35,7 +36,6 @@ public class QrActivity extends AppCompatActivity {
 
             }
         });
-
     }
 
     @Override
@@ -46,17 +46,11 @@ public class QrActivity extends AppCompatActivity {
             if(result.getContents() == null) {
                 Toast.makeText(this, "You cancelled scanning.", Toast.LENGTH_SHORT).show();
             } else {
-                //Toast.makeText(this, result.getContents(), Toast.LENGTH_LONG).show();
+                SharedPreferences.Editor editor = getSharedPreferences("sharedData", MODE_PRIVATE).edit();
+                editor.putString("pesel", result.getContents());
+                editor.apply();
 
-                //Assigned activity to target
-                Intent target = new Intent(this, PatientActivity.class);
-
-                //Assigned QRScanner result to target
-                Bundle passingData = new Bundle();
-                passingData.putString("pesel", result.getContents());
-                target.putExtras(passingData);
-
-                //Opens target
+                Intent target = new Intent(this, MenuActivity.class);
                 startActivity(target);
 
             }

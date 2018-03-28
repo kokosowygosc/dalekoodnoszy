@@ -1,5 +1,6 @@
 package com.example.eziteam.hospitalassistant;
 
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ExpandableListView;
@@ -24,6 +25,15 @@ public class MedicineActivity extends AppCompatActivity {
         initData();
         listAdapter = new ExpandableListAdapter(this,listDataHeader,listHash);
         listView.setAdapter(listAdapter);
+
+        String pesel;
+        pesel="";
+        SharedPreferences prefs = getSharedPreferences("sharedData", MODE_PRIVATE);
+        String restoredText = prefs.getString("pesel", null);
+        if (restoredText != null) {
+            pesel = prefs.getString("pesel", "");
+        }
+
     }
 
     private void initData() {

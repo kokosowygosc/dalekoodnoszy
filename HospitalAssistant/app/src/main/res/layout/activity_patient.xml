@@ -15,6 +15,7 @@
         android:layout_marginBottom="8dp"
         android:layout_marginStart="8dp"
         android:text="Pobierz"
+        android:visibility="invisible"
         app:layout_constraintBottom_toTopOf="@+id/firstnameLabel"
         app:layout_constraintEnd_toStartOf="@+id/button_download"
         app:layout_constraintHorizontal_bias="0.0"
