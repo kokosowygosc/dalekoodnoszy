@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.CompoundButton;
@@ -14,12 +15,26 @@ import android.widget.ImageButton;
 import android.widget.Switch;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.example.eziteam.Connect.ConnectConfig;
+import com.example.eziteam.Connect.SQLController;
+import com.example.eziteam.Connect.SQLiteHandler;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
 
     public class HomeActivity extends AppCompatActivity {
     SharedPreferences.Editor editor;
     Boolean testMode=false;
+    private SQLiteHandler db;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,6 +45,11 @@ import com.google.zxing.integration.android.IntentResult;
         editor.putString("id","");
         editor.putBoolean("testMode",false);
         editor.apply();
+
+        db = new SQLiteHandler(getApplicationContext());
+        //db.deletedoctor();
+        String unique_id = "999999999"; //999999998 999999997 999999996
+        Get_doc(unique_id);
 
         SharedPreferences prefs = getSharedPreferences("sharedData", MODE_PRIVATE);
         Boolean restoredText = prefs.getBoolean("testMode", false);
@@ -130,4 +150,65 @@ import com.google.zxing.integration.android.IntentResult;
             }
 
         }
-}
+
+        public void Get_doc(final String unique_id) {
+            // Tag used to cancel the request
+            String tag_string_req = "req_login";
+
+            StringRequest strReq = new StringRequest(Request.Method.POST,
+                    ConnectConfig.URL_REGISTER, new Response.Listener<String>() {
+
+                @Override
+                public void onResponse(String response) {
+                    try {
+                        JSONObject jObj = new JSONObject(response);
+                        boolean error = jObj.getBoolean("error");
+
+                        // Check for error node in json
+                        if (!error) {
+                            JSONObject doctor = jObj.getJSONObject("doctor");
+                            String unique_id = doctor.getString("unique_id");
+                            String name = doctor.getString("d_name");
+                            String surname = doctor.getString("d_surname");
+                            String spec = doctor.getString("d_spec");
+                            String extr = doctor.getString("d_extr");
+                            // Inserting row in users table
+                            db.add_doctor(unique_id,name,surname,spec,extr);
+
+                            // TUTAJ MOŻNA WYKORZYSTAC POWYŻSZE POLA I COS TAM POROBIC
+
+                        } else {
+                            // Error in login. Get the error message
+                            String errorMsg = jObj.getString("error_msg");
+                            Toast.makeText(getApplicationContext(),
+                                    errorMsg, Toast.LENGTH_LONG).show();
+                        }
+                    } catch (JSONException e) {
+                        // JSON error
+                        e.printStackTrace();
+                        Toast.makeText(getApplicationContext(), "Json error: " + e.getMessage(), Toast.LENGTH_LONG).show();
+                    }
+
+                }
+            }, new Response.ErrorListener() {
+
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Toast.makeText(getApplicationContext(),
+                            error.getMessage(), Toast.LENGTH_LONG).show();
+                }
+            }) {
+
+                @Override
+                protected Map<String, String> getParams() {
+                    // Posting parameters to login url
+                    Map<String, String> params = new HashMap<String, String>();
+                    params.put("unique_id", unique_id);
+                    return params;
+                }
+            };
+            // Adding request to request queue
+            SQLController.getInstance().addToRequestQueue(strReq, tag_string_req);
+        }
+
+    }

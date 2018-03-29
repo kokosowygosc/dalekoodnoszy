@@ -37,16 +37,15 @@ public class PatientActivity extends AppCompatActivity {
     private EditText patient_postal;
     private EditText patient_city;
     private EditText patient_home_number;
+    private EditText patient_street;
     private ProgressDialog pDialog;
-    private Button button_download;
     private Button button_actualize;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_patient);
 
-        String pesel;
-        pesel="";
+        String pesel ="";
         SharedPreferences prefs = getSharedPreferences("sharedData", MODE_PRIVATE);
         String restoredText = prefs.getString("pesel", null);
         if (restoredText != null) {
@@ -59,9 +58,9 @@ public class PatientActivity extends AppCompatActivity {
         patient_phone = (EditText)findViewById(R.id.phoneText);
         patient_blood = (EditText)findViewById(R.id.bloodTypeText);
         patient_postal = (EditText)findViewById(R.id.postalAddressText);
+        patient_street = (EditText)findViewById(R.id.streetText);
         patient_city = (EditText)findViewById(R.id.cityText);
         patient_home_number = (EditText)findViewById(R.id.homeNumberText);
-        button_download = (Button) findViewById(R.id.button_download);
         button_actualize = (Button) findViewById(R.id.button_actualize);
 
         pDialog = new ProgressDialog(this);
@@ -70,42 +69,23 @@ public class PatientActivity extends AppCompatActivity {
         db.deletepatient();
         Get_patient(pesel);
 
-        final String finalPesel = pesel;
-        button_download.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view) {
-                db.deletepatient();
-                Get_patient(finalPesel);
-            }
-        });
-
         button_actualize.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 db.deletepatient();
-                Actualize(patient_name.getText().toString(), patient_surname.getText().toString(), patient_pesel.getText().toString(), patient_phone.getText().toString(),patient_blood.getText().toString(),patient_postal.getText().toString(),patient_city.getText().toString(),patient_home_number.getText().toString());
+                Actualize(patient_name.getText().toString(), patient_surname.getText().toString(), patient_pesel.getText().toString(), patient_phone.getText().toString(),patient_blood.getText().toString(),patient_postal.getText().toString(),patient_city.getText().toString(),patient_home_number.getText().toString(), patient_street.getText().toString());
             }
         });
-
-        HashMap<String, String> patient = db.getPatientDetails();
-
-        String p_name = patient.get("p_name");
-        String p_surname = patient.get("p_surname");
-        String p_pesel = patient.get("p_pesel");
-        String p_phone = patient.get("p_phone");
-        String p_blood = patient.get("p_blood");
-        String p_postal = patient.get("p_postal");
-        String p_city = patient.get("p_city");
-        String p_home_number = patient.get("p_home_number");
     }
 
-    private void Get_patient(final String pesel) {
+    public void Get_patient(final String pesel) {
         // Tag used to cancel the request
         String tag_string_req = "req_login";
 
-        pDialog.setMessage("Pobieranie danych..." );
+        pDialog.setMessage("Pobieranie danych...");
         showDialog();
 
 
-        StringRequest strReq = new StringRequest( Request.Method.POST,
+        StringRequest strReq = new StringRequest(Request.Method.POST,
                 ConnectConfig.URL_LOGIN, new Response.Listener<String>() {
 
             @Override
@@ -129,9 +109,15 @@ public class PatientActivity extends AppCompatActivity {
                         String p_postal = patient.getString("p_postal");
                         String p_city = patient.getString("p_city");
                         String p_home_number = patient.getString("p_home_number");
+                        String p_street = patient.getString("p_street");
+
+
+                        String p_time = ""; String p_temperature = "";
+                        String p_pressure = ""; String p_time_medicine ="";
+                        String p_text_medicine = "";
 
                         // Inserting row in users table
-                        db.addPatient(p_name,p_surname,p_pesel,p_phone,p_blood,p_postal,p_city,p_home_number);
+                        db.addPatient(p_name, p_surname, p_pesel, p_phone, p_blood, p_postal, p_city, p_home_number, p_street, p_time, p_temperature, p_pressure, p_time_medicine, p_text_medicine);
 
                         patient_name.setText(p_name);
                         patient_surname.setText(p_surname);
@@ -141,6 +127,8 @@ public class PatientActivity extends AppCompatActivity {
                         patient_postal.setText(p_postal);
                         patient_city.setText(p_city);
                         patient_home_number.setText(p_home_number);
+                        patient_street.setText(p_street);
+
                     } else {
                         // Error in login. Get the error message
                         String errorMsg = jObj.getString("error_msg");
@@ -189,7 +177,7 @@ public class PatientActivity extends AppCompatActivity {
             pDialog.dismiss();
     }
 
-    private void Actualize(final String name, final String surname, final String pesel, final String phone, final String blood, final String postal, final String city, final String home_number) {
+    private void Actualize(final String name, final String surname, final String pesel, final String phone, final String blood, final String postal, final String city, final String home_number, final String street) {
 // Tag used to cancel the request
         String tag_string_req = "req_login";
 
@@ -210,7 +198,9 @@ public class PatientActivity extends AppCompatActivity {
 
                     // Check for error node in json
                     if (!error) {
-                        db.addPatient(name,surname,pesel,phone,blood,postal,city,home_number);
+                        final String p_time=""; final String p_temperature=""; final String p_pressure="";
+                        final String p_time_medicine=""; final String p_text_medicine="";
+                        db.addPatient(name,surname,pesel,phone,blood,postal,city,home_number,street,p_time,p_temperature,p_pressure,p_time_medicine,p_text_medicine);
                         // Launch main activity
                         Intent intent = new Intent(PatientActivity.this,PatientActivity.class);
                         startActivity(intent);
@@ -251,6 +241,7 @@ public class PatientActivity extends AppCompatActivity {
                 params.put("postal", postal);
                 params.put("city", city);
                 params.put("home_number", home_number);
+                params.put("street", street);
                 return params;
             }
 

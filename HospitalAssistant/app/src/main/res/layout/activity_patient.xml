@@ -103,8 +103,34 @@
         app:layout_constraintBottom_toTopOf="@+id/phoneLabel"
         app:layout_constraintStart_toStartOf="@+id/lastnameLabel" />
 
+    <TextView
+        android:id="@+id/streetLabel"
+        android:layout_width="145dp"
+        android:layout_height="45dp"
+        android:layout_marginBottom="32dp"
+        android:layout_marginStart="8dp"
+        android:padding="10dp"
+        android:text="Street:"
+        android:textAppearance="@style/TextAppearance.AppCompat"
+        android:textColor="@android:color/white"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/phoneLabel"
+        app:layout_constraintStart_toStartOf="@+id/lastnameLabel" />
+
     <EditText
         android:id="@+id/peselText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="28dp"
+        android:ems="10"
+        android:inputType="number"
+        android:text=""
+        android:textColor="@android:color/white"
+        app:layout_constraintBottom_toTopOf="@+id/phoneText"
+        app:layout_constraintEnd_toEndOf="@+id/lastnameText" />
+
+    <EditText
+        android:id="@+id/streetText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
