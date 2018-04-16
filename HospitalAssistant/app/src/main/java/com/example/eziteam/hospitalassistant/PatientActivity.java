@@ -3,6 +3,7 @@ package com.example.eziteam.hospitalassistant;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -18,6 +19,11 @@ import com.android.volley.toolbox.StringRequest;
 import com.example.eziteam.Connect.ConnectConfig;
 import com.example.eziteam.Connect.SQLController;
 import com.example.eziteam.Connect.SQLiteHandler;
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.MultiFormatWriter;
+import com.google.zxing.WriterException;
+import com.google.zxing.common.BitMatrix;
+import com.journeyapps.barcodescanner.BarcodeEncoder;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -28,6 +34,7 @@ import java.util.Map;
 
 public class PatientActivity extends AppCompatActivity {
     private static final String TAG = PatientActivity.class.getSimpleName();
+    private String passingPesel;
     private SQLiteHandler db;
     private EditText patient_name;
     private EditText patient_surname;
@@ -39,7 +46,7 @@ public class PatientActivity extends AppCompatActivity {
     private EditText patient_home_number;
     private EditText patient_street;
     private ProgressDialog pDialog;
-    private Button button_actualize;
+    private Button button_actualize, button_generate;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,6 +69,7 @@ public class PatientActivity extends AppCompatActivity {
         patient_city = (EditText)findViewById(R.id.cityText);
         patient_home_number = (EditText)findViewById(R.id.homeNumberText);
         button_actualize = (Button) findViewById(R.id.button_actualize);
+        button_generate = (Button) findViewById(R.id.button_generate);
 
         pDialog = new ProgressDialog(this);
         pDialog.setCancelable(false);
@@ -73,6 +81,17 @@ public class PatientActivity extends AppCompatActivity {
             public void onClick(View view) {
                 db.deletepatient();
                 Actualize(patient_name.getText().toString(), patient_surname.getText().toString(), patient_pesel.getText().toString(), patient_phone.getText().toString(),patient_blood.getText().toString(),patient_postal.getText().toString(),patient_city.getText().toString(),patient_home_number.getText().toString(), patient_street.getText().toString());
+            }
+        });
+        button_generate.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+
+                passingPesel = patient_pesel.getText().toString().trim();
+                Intent target = new Intent(getApplicationContext(), GeneratorActivity.class);
+                Bundle passingData = new Bundle();
+                passingData.putString("QR",passingPesel);
+                target.putExtras(passingData);
+                startActivity(target);
             }
         });
     }
