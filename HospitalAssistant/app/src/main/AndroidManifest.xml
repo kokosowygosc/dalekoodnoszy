@@ -6,6 +6,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
+
     <application
         android:name="com.example.eziteam.Connect.SQLController"
         android:allowBackup="true"
@@ -36,6 +37,7 @@
         <activity android:name=".MedicineActivity" />
         <activity android:name=".TemperatureActivity" />
         <activity android:name=".PressureActivity" />
+        <activity android:name=".GeneratorActivity" />
         <activity
             android:name=".SettingsActivity"
             android:label="@string/title_activity_settings"
